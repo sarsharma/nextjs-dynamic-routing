@@ -1,15 +1,15 @@
-import { useRouter } from 'next/router'
 import Link from 'next/link'
-import Header from '../../../components/header'
 import crypto from 'crypto'
 
-export default function PostPage() {
-  const router = useRouter()
-  const id = router.query.id as string
+export async function getServerSideProps(context : any) {
+  const id = context.params.id as string
+  context.res.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate')
+  return { props : { id } }
+}
 
+const Id = (id: any) => {
   return (
     <>
-      <Header />
       <p>Post: {crypto.randomBytes(838400).toString('hex')}</p>
       <ul>
         <li>
@@ -22,3 +22,5 @@ export default function PostPage() {
     </>
   )
 }
+
+export default Id
