@@ -3,7 +3,7 @@ import crypto from 'crypto'
 
 export async function getServerSideProps(context : any) {
   const id = context.params.id as string
-  context.res.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate')
+  context.res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate')
   return { props : { id } }
 }
 
